@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/view_menu" android:icon="@android:drawable/ic_menu_today"
+            android:title="View Menu" />
+        <item android:id="@+id/current_orders" android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Current Orders" />
+        <item android:id="@+id/order_history" android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="Order History" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item android:id="@+id/sign_out" android:icon="@android:drawable/ic_delete"
+                android:title="Sign out" />
+        </menu>
+    </item>
+
+</menu>

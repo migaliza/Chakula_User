@@ -1,6 +1,7 @@
 package com.example.migaliza.chakula_user;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -58,6 +59,15 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    public void move(View view){
+        if(view == findViewById(R.id.dummy_button)){
+            Intent intent = new Intent(this, Home.class);
+            intent.putExtra("name", "Salifu");
+            intent.putExtra("password", "mypass");
+            startActivity(intent);
+        }
     }
 
     @Override
