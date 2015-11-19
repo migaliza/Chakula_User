@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="username">username</string>
+    <string name="email">android.studio@android.com</string>
+    <string name="icondesc">appicon</string>
+    <string name="name">name</string>
+</resources>
