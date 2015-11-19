@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,11 +41,14 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView username_area = (TextView)findViewById(R.id.username_area);
+
         Intent intent = getIntent();
         if(intent.hasExtra("username") && intent.hasExtra("passwird") && intent.hasExtra("user_id")){
             this.username = intent.getExtras().getString("username");
             this.passord = intent.getExtras().getString("password");
             this.user_id = Integer.parseInt(intent.getExtras().getString("user_id"));
+            username_area.setText(this.username);
         }
     }
 
