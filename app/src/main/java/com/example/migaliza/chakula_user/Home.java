@@ -16,6 +16,13 @@ import android.view.MenuItem;
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public String username;
+    public String passord;
+    public int user_id;
+    //private RecyclerView mRecyclerView;
+    //private RecyclerView.Adapter mAdapter;
+    //private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +40,17 @@ public class Home extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //start view menu
-        //myfrag = new viewMenu();
+        Intent intent = getIntent();
+        if(intent.hasExtra("username") && intent.hasExtra("passwird") && intent.hasExtra("user_id")){
+            this.username = intent.getExtras().getString("username");
+            this.passord = intent.getExtras().getString("password");
+            this.user_id = Integer.parseInt(intent.getExtras().getString("user_id"));
+        }
     }
 
+    /**
+     * Takes user to previous screen
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -47,6 +61,11 @@ public class Home extends AppCompatActivity
         }
     }
 
+    /**
+     *
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -54,21 +73,31 @@ public class Home extends AppCompatActivity
         return true;
     }
 
+    /**
+     *
+     * @param meal
+     * @return
+     */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem meal) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        int id = meal.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(meal);
     }
 
+    /**
+     *
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -78,12 +107,12 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.view_menu) {
             // Handle the camera action
-            myfrag = new viewMenu();
+            myfrag = new MenuFragment();
             getSupportActionBar().setTitle("Menu");
         } else if (id == R.id.current_orders) {
             getSupportActionBar().setTitle("Current Orders");
         } else if (id == R.id.order_history) {
-            myfrag = new orderHistory();
+            myfrag = new orderHistoryFragment();
             getSupportActionBar().setTitle("Order History");
         } else if (id == R.id.sign_out) {
             Intent intent = getIntent();
