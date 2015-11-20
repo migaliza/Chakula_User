@@ -18,19 +18,17 @@ import java.util.Map;
 public class OrderHistory {
 
     /**
-     * An array of sample (dummy) items.
+     * An array of ORDERS.
      */
     public static List<Order> ORDERS = new ArrayList<Order>();
 
     /**
-     * A map of sample (dummy) items, by ID.
+     * A map of sample ORDERS, by ID.
      */
     public static Map<String, Order> ORDER_MAP = new HashMap<>();
 
     //get order history here from database
     private static int user_id = 58062016;
-
-    public static String[] thehistory = {"Banku 12 10/12/12", "Fufu 11.9 12/10/10"};
 
     static {
         // Add 3 sample items.
@@ -49,7 +47,7 @@ public class OrderHistory {
             for (int i = 0; i < history.length; i++) {
                 addItem(new Order(history[i]));
             }
-        }else{
+        }else{  
             System.out.println("History array is null");
         }
     }
