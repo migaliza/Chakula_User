@@ -17,12 +17,9 @@ import android.widget.TextView;
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public String username;
-    public String passord;
+    public static String username;
+    public static String passord;
     public int user_id;
-    //private RecyclerView mRecyclerView;
-    //private RecyclerView.Adapter mAdapter;
-    //private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

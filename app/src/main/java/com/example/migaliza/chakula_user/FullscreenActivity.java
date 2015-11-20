@@ -38,8 +38,13 @@ public class FullscreenActivity extends AppCompatActivity {
 
             Controller mycontrol = new Controller();
             String cmd = "login";
-            String url = "http://10.10.56.45/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
+            String url = "http://192.168.56.1/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
             mycontrol.execute(cmd, url);
+            try {
+                Thread.sleep(500);                 //1000 milliseconds is one second.
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
             String server_username = mycontrol.username;
             String server_password = mycontrol.password;
             int server_user_id = mycontrol.user_id;

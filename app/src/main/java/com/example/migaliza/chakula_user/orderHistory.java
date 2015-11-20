@@ -27,33 +27,52 @@ public class OrderHistory {
      */
     public static Map<String, Order> ORDER_MAP = new HashMap<>();
 
+    //get order history here from database
+    private static int user_id = 58062016;
+
+    public static String[] thehistory = {"Banku 12 10/12/12", "Fufu 11.9 12/10/10"};
+
     static {
         // Add 3 sample items.
-        addItem(new Order("1", "banku hist"));
-        addItem(new Order("2", "Waakye ist"));
-        addItem(new Order("3", "Dorkuni hist"));
+        Controller mycontrol = new Controller();
+        String url = "http://192.168.56.1/chakula/controller/ajax-action.php?cmd=22&user_id="+user_id;
+        mycontrol.execute("history", url);
+        try {
+            Thread.sleep(500);                 //1000 milliseconds is one second.
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        String[] history = mycontrol.getHistory();
+        if(history != null) {
+            System.out.println("Length of array is " + history.length);
+
+            for (int i = 0; i < history.length; i++) {
+                addItem(new Order(history[i]));
+            }
+        }else{
+            System.out.println("History array is null");
+        }
     }
 
     private static void addItem(Order order) {
         ORDERS.add(order);
-        ORDER_MAP.put(order.id, order);
+        ORDER_MAP.put(order.order_details, order);
     }
 
     /**
      * A dummy item representing a piece of content.
      */
     public static class Order {
-        public String id;
-        public String content;
+        public String order_details;
 
-        public Order(String id, String content) {
-            this.id = id;
-            this.content = content;
+        public Order(String order_details) {
+            this.order_details = order_details;
+
         }
 
         @Override
         public String toString() {
-            return content;
+            return order_details;
         }
     }
 }

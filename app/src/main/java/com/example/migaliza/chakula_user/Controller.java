@@ -21,14 +21,22 @@ public class Controller extends AsyncTask<String, Void, String> {
     public static String username;
     public static String password;
     public static int user_id;
+    public static String[] history;
 
     protected String doInBackground(String... params) {
         String cmd = params[0];
         String url = params[1];
-        breakJsonLogin(sendRequest(url));
+        if(cmd.equals("login")){
+            breakJsonLogin(sendRequest(url));
+        }else if(cmd.equals("history")){
+            breakJsonHistory(sendRequest(url));
+        }
         return "done";
     }
 
+    public static String[] getHistory(){
+        return history;
+    }
     protected String sendRequest(String myUrl) {
         String response = "";
         HttpURLConnection urlConnection=null;
@@ -115,4 +123,53 @@ public class Controller extends AsyncTask<String, Void, String> {
             }
             return null;
         }
+
+    public String[] breakJsonHistory(String jsonData){
+
+        JSONObject jsonResponse;
+
+        try {
+
+            /****** Creates a new JSONObject with name/value mappings from the JSON string. ********/
+            jsonResponse = new JSONObject(jsonData);
+
+            /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
+            /*******  Returns null otherwise.  *******/
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("orders");
+
+            if(jsonMainNode ==  null){
+                return null;
+            }
+
+            System.out.println(jsonMainNode);
+            /*********** Process each JSON Node ************/
+
+            int lengthJsonArr = jsonMainNode.length();
+            history = new String[lengthJsonArr];
+            for(int i=0; i < lengthJsonArr; i++)
+            {
+                /****** Get Object for each JSON node.***********/
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+
+                /******* Fetch node values **********/
+                String meal_name = jsonChildNode.optString("meal_name");
+                String meal_price   = jsonChildNode.optString("user_name");
+                String timestamp = jsonChildNode.optString("timestamp");
+
+
+                history[i] = meal_name+"    "+meal_price+"    "+timestamp;
+
+            }
+
+            /************ Show Output on screen/activity **********/
+
+            //output.setText(OutputData);
+            System.out.println(history[0]);
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
