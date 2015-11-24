@@ -11,6 +11,7 @@ public class Meal {
     public String cafeteria;
     public String availability;
 
+
     /**
      *
      * @param meal_id
@@ -25,22 +26,5 @@ public class Meal {
         this.price = price;
         this.cafeteria = cafeteria;
         this.availability = availability;
-    }
-
-    public String getMealName(){
-        return this.mealName;
-    }
-
-    public String getPrice(){
-        return this.price;
-    }
-
-    public String getCafeteria(){
-        return this.cafeteria;
-    }
-
-    @Override
-    public String toString() {
-        return mealName+"            "+cafeteria+"             "+price;
     }
 }

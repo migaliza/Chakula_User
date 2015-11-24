@@ -17,25 +17,4 @@ public class CurrentOrder {
         this.timestamp = timestamp;
         this.status = status;
     }
-
-    public String getOrder_details(){
-        return this.getOrder_details();
-    }
-
-    public String getPrice(){
-        return this.meal_price;
-    }
-
-    public String getTimestamp(){
-        return this.timestamp;
-    }
-
-    public String getStatus(){
-        return this.status;
-    }
-
-    @Override
-    public String toString() {
-        return order_details;
-    }
 }

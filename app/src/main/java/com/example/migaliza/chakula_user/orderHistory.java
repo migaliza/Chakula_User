@@ -14,21 +14,4 @@ public class OrderHistory {
         this.meal_price = meal_price;
         this.timestamp = timestamp;
     }
-
-    public String getOrder_details(){
-        return this.order_details;
-    }
-
-    public String getPrice(){
-        return this.meal_price;
-    }
-
-    public String getTimestamp(){
-        return this.timestamp;
-    }
-
-    @Override
-    public String toString() {
-        return order_details;
-    }
 }

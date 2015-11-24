@@ -19,7 +19,7 @@ public class OrderHistoryragment extends ListFragment {
         ArrayList<OrderHistory> orderhistorylist;
         Controller mycontrol = new Controller();
         int user_id = 58062016;
-        String url = "http://10.10.43.174/chakula/controller/ajax-action.php?cmd=22&user_id="+user_id;
+        String url = "http://10.10.33.36/chakula/controller/ajax-action.php?cmd=22&user_id="+user_id;
         String cmd = "history";
         mycontrol.execute(cmd, url);
         try {

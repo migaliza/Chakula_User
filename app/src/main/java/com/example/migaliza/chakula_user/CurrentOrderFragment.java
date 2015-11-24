@@ -18,8 +18,9 @@ public class CurrentOrderFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         ArrayList<CurrentOrder> orders;
         Controller mycontrol = new Controller();
-        String url = "http://10.10.43.174/chakula/controller/ajax-action.php?cmd=20";
-        String cmd = "meals";
+        int user_id = 58062016;
+        String url = "http://10.10.33.36/chakula/controller/ajax-action.php?cmd=23&user_id="+user_id;
+        String cmd = "current";
         mycontrol.execute(cmd, url);
         try {
             Thread.sleep(500);                 //1000 milliseconds is one second.

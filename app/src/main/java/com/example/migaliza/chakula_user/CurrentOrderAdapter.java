@@ -49,7 +49,7 @@ public class CurrentOrderAdapter extends ArrayAdapter<CurrentOrder> {
         // reuse views
         if (rowView == null) {
             //LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = LayoutInflater.from(context).inflate(R.layout.single_meal,
+            rowView = LayoutInflater.from(context).inflate(R.layout.current_order_row,
                     null, false);
             //rowView = inflater.inflate(R.layout.single_meal, parent, false);
             // configure view holder

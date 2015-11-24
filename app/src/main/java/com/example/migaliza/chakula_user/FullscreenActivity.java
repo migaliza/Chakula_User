@@ -38,7 +38,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
             Controller mycontrol = new Controller();
             String cmd = "login";
-            String url = "http://10.10.43.174/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
+            String url = "http://10.10.33.36/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
             mycontrol.execute(cmd, url);
             try {
                 Thread.sleep(500);                 //1000 milliseconds is one second.

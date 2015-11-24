@@ -19,7 +19,7 @@ public class MealsFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         ArrayList<Meal> meals;
         Controller mycontrol = new Controller();
-        String url = "http://10.10.43.174/chakula/controller/ajax-action.php?cmd=20";
+        String url = "http://10.10.33.36/chakula/controller/ajax-action.php?cmd=20";
         String cmd = "meals";
         mycontrol.execute(cmd, url);
         try {

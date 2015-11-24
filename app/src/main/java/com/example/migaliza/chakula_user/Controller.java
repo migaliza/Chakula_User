@@ -37,6 +37,8 @@ public class Controller extends AsyncTask<String, Void, String> {
             breakJsonHistory(sendRequest(url));
         }else if(cmd.equals("meals")){
             breakJsonMeals(sendRequest(url));
+        }else if(cmd.equals("current")){
+            breakJsonCurrent(sendRequest(url));
         }
         return "done";
     }
@@ -176,7 +178,7 @@ public class Controller extends AsyncTask<String, Void, String> {
             /************ Show Output on screen/activity **********/
 
         //output.setText(OutputData);
-           System.out.println(historylist.get(0).getOrder_details());
+           System.out.println(historylist.get(0).order_details);
 
         } catch (JSONException e) {
 
@@ -226,6 +228,56 @@ public class Controller extends AsyncTask<String, Void, String> {
 
             //output.setText(OutputData);
             System.out.println(meals.get(0));
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+        return "Yes";
+    }
+
+    public String breakJsonCurrent(String jsonData){
+
+        JSONObject jsonResponse;
+
+        try {
+
+            /****** Creates a new JSONObject with name/value mappings from the JSON string. ********/
+            jsonResponse = new JSONObject(jsonData);
+
+            /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
+            /*******  Returns null otherwise.  *******/
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("current_orders");
+
+            if(jsonMainNode ==  null){
+                return null;
+            }
+
+            System.out.println(jsonMainNode);
+            /*********** Process each JSON Node ************/
+
+            int lengthJsonArr = jsonMainNode.length();
+            //historylist = new OrderHistory.Order[lengthJsonArr];
+            for(int i=0; i < lengthJsonArr; i++)
+            {
+                /****** Get Object for each JSON node.***********/
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+
+                /******* Fetch node values **********/
+                String order_detail = jsonChildNode.optString("meal_name");
+                String meal_price   = jsonChildNode.optString("meal_price");
+                String timestamp = jsonChildNode.optString("timestamp");
+                String status = jsonChildNode.optString("status");
+
+                CurrentOrder myorde = new CurrentOrder(order_detail, meal_price, timestamp, status);
+                currentOrders.add(myorde);
+
+            }
+
+            /************ Show Output on screen/activity **********/
+
+            //output.setText(OutputData);
+            System.out.println(currentOrders.get(0).order_details);
 
         } catch (JSONException e) {
 
