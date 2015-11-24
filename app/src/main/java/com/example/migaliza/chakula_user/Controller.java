@@ -277,7 +277,7 @@ public class Controller extends AsyncTask<String, Void, String> {
             /************ Show Output on screen/activity **********/
 
             //output.setText(OutputData);
-            System.out.println(currentOrders.get(0).order_details);
+           // System.out.println(currentOrders.get(0).order_details);
 
         } catch (JSONException e) {
 
