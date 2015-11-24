@@ -12,16 +12,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
 
 /**
- * Created by Salifu on 11/12/2015.
+ * Created by Salifu on 11/23/2015.
  */
 public class Controller extends AsyncTask<String, Void, String> {
 
     public static String username;
     public static String password;
     public static int user_id;
-    public static String[] history;
+    //public static OrderHistory.Order[] history;
+    public ArrayList<Meal> meals = new ArrayList<>();
+    public ArrayList<OrderHistory> historylist = new ArrayList<>();
+    public ArrayList<CurrentOrder> currentOrders = new ArrayList<>();
 
     protected String doInBackground(String... params) {
         String cmd = params[0];
@@ -30,13 +35,17 @@ public class Controller extends AsyncTask<String, Void, String> {
             breakJsonLogin(sendRequest(url));
         }else if(cmd.equals("history")){
             breakJsonHistory(sendRequest(url));
+        }else if(cmd.equals("meals")){
+            breakJsonMeals(sendRequest(url));
         }
         return "done";
     }
 
-    public static String[] getHistory(){
+    /*public static OrderHistory.Order[] getHistory(){
         return history;
     }
+    */
+
     protected String sendRequest(String myUrl) {
         String response = "";
         HttpURLConnection urlConnection=null;
@@ -70,61 +79,113 @@ public class Controller extends AsyncTask<String, Void, String> {
     }
 
     /******** Get login details ********/
- public String[] breakJsonLogin(String jsonData){
+    public String[] breakJsonLogin(String jsonData){
 
-            String OutputData = "";
-            JSONObject jsonResponse;
+        String OutputData = "";
+        JSONObject jsonResponse;
 
-            try {
+        try {
 
-                /****** Creates a new JSONObject with name/value mappings from the JSON string. ********/
-                jsonResponse = new JSONObject(jsonData);
+            /****** Creates a new JSONObject with name/value mappings from the JSON string. ********/
+            jsonResponse = new JSONObject(jsonData);
 
-                /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
-                /*******  Returns null otherwise.  *******/
-                JSONArray jsonMainNode = jsonResponse.optJSONArray("user");
+            /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
+            /*******  Returns null otherwise.  *******/
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("user");
 
-                if(jsonMainNode ==  null){
-                    return null;
-                }
-
-                System.out.println(jsonMainNode);
-                /*********** Process each JSON Node ************/
-
-                int lengthJsonArr = jsonMainNode.length();
-
-                for(int i=0; i < lengthJsonArr; i++)
-                {
-                    /****** Get Object for each JSON node.***********/
-                    JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-
-                    /******* Fetch node values **********/
-                    user_id = Integer.parseInt(jsonChildNode.optString("user_id"));
-                    username   = jsonChildNode.optString("user_name");
-                    password = jsonChildNode.optString("user_password");
-
-
-                   OutputData += "Node : \n\n     "+ user_id +" | "
-                            + username+" | "
-                            + password +" \n\n ";
-
-                    //Log.i("JSON parse", song_name);
-
-                }
-
-                /************ Show Output on screen/activity **********/
-
-                //output.setText(OutputData);
-                System.out.println(OutputData);
-
-            } catch (JSONException e) {
-
-                e.printStackTrace();
+            if(jsonMainNode ==  null){
+                return null;
             }
-            return null;
-        }
 
-    public String[] breakJsonHistory(String jsonData){
+            System.out.println(jsonMainNode);
+            /*********** Process each JSON Node ************/
+
+            int lengthJsonArr = jsonMainNode.length();
+
+            for(int i=0; i < lengthJsonArr; i++)
+            {
+                /****** Get Object for each JSON node.***********/
+                JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+
+                /******* Fetch node values **********/
+                user_id = Integer.parseInt(jsonChildNode.optString("user_id"));
+                username   = jsonChildNode.optString("user_name");
+                password = jsonChildNode.optString("user_password");
+
+
+                OutputData += "Node : \n\n     "+ user_id +" | "
+                        + username+" | "
+                        + password +" \n\n ";
+
+                //Log.i("JSON parse", song_name);
+
+            }
+
+            /************ Show Output on screen/activity **********/
+
+            //output.setText(OutputData);
+            System.out.println(OutputData);
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public String breakJsonHistory(String jsonData){
+
+        JSONObject jsonResponse;
+
+        try {
+
+            /****** Creates a new JSONObject with name/value mappings from the JSON string. ********/
+            jsonResponse = new JSONObject(jsonData);
+
+            /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
+    /*******  Returns null otherwise.  *******/
+           JSONArray jsonMainNode = jsonResponse.optJSONArray("orders");
+
+            if(jsonMainNode ==  null){
+                return null;
+            }
+
+            System.out.println(jsonMainNode);
+            /*********** Process each JSON Node ************/
+
+            int lengthJsonArr = jsonMainNode.length();
+            //historylist = new OrderHistory.Order[lengthJsonArr];
+            for(int i=0; i < lengthJsonArr; i++)
+            {
+                /****** Get Object for each JSON node.***********/
+               JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+
+                /******* Fetch node values **********/
+                String meal_name = jsonChildNode.optString("meal_name");
+                String meal_price   = jsonChildNode.optString("meal_price");
+                String timestamp = jsonChildNode.optString("timestamp");
+                String cafeteria = jsonChildNode.optString("cafeteria");
+                String order_detail = meal_name+"   "+cafeteria;
+
+                OrderHistory myorde = new OrderHistory(order_detail, meal_price, timestamp);
+                historylist.add(myorde);
+
+            }
+
+            /************ Show Output on screen/activity **********/
+
+        //output.setText(OutputData);
+           System.out.println(historylist.get(0).getOrder_details());
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+        return "Yes";
+    }
+
+    public String breakJsonMeals(String jsonData){
 
         JSONObject jsonResponse;
 
@@ -135,7 +196,7 @@ public class Controller extends AsyncTask<String, Void, String> {
 
             /***** Returns the value mapped by name if it exists and is a JSONArray. ***/
             /*******  Returns null otherwise.  *******/
-            JSONArray jsonMainNode = jsonResponse.optJSONArray("orders");
+            JSONArray jsonMainNode = jsonResponse.optJSONArray("meals");
 
             if(jsonMainNode ==  null){
                 return null;
@@ -145,7 +206,7 @@ public class Controller extends AsyncTask<String, Void, String> {
             /*********** Process each JSON Node ************/
 
             int lengthJsonArr = jsonMainNode.length();
-            history = new String[lengthJsonArr];
+            //meals = new Meal[lengthJsonArr];
             for(int i=0; i < lengthJsonArr; i++)
             {
                 /****** Get Object for each JSON node.***********/
@@ -153,23 +214,24 @@ public class Controller extends AsyncTask<String, Void, String> {
 
                 /******* Fetch node values **********/
                 String meal_name = jsonChildNode.optString("meal_name");
-                String meal_price   = jsonChildNode.optString("user_name");
-                String timestamp = jsonChildNode.optString("timestamp");
+                String meal_price   = jsonChildNode.optString("meal_price");
+                String meal_id = jsonChildNode.optString("meal_id");
+                String cafeteria = jsonChildNode.optString("cafeteria");
+                String availability = jsonChildNode.optString("availability");
 
-
-                history[i] = meal_name+"    "+meal_price+"    "+timestamp;
-
+                meals.add(new Meal(meal_id, meal_name, meal_price, cafeteria, availability));
             }
 
             /************ Show Output on screen/activity **********/
 
             //output.setText(OutputData);
-            System.out.println(history[0]);
+            System.out.println(meals.get(0));
 
         } catch (JSONException e) {
 
             e.printStackTrace();
         }
-        return null;
+        return "Yes";
     }
 }
+

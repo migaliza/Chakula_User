@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     public static String username;
     public static String passord;
@@ -41,12 +41,21 @@ public class Home extends AppCompatActivity
         TextView username_area = (TextView)findViewById(R.id.username_area);
 
         Intent intent = getIntent();
-        if(intent.hasExtra("username") && intent.hasExtra("passwird") && intent.hasExtra("user_id")){
+        if(intent.hasExtra("username") && intent.hasExtra("password") && intent.hasExtra("user_id")){
             this.username = intent.getExtras().getString("username");
             this.passord = intent.getExtras().getString("password");
             this.user_id = Integer.parseInt(intent.getExtras().getString("user_id"));
             username_area.setText(this.username);
         }
+        getSupportActionBar().setTitle("Menu");
+
+        //super.onCreate(savedInstanceState);
+        //setContentView(R.layout.activity_home);
+        //RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
+        /*.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);*/
     }
 
     /**
@@ -107,13 +116,13 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.view_menu) {
-            // Handle the camera action
-            myfrag = new MenuFragment();
+            myfrag = new MealsFragment();
             getSupportActionBar().setTitle("Menu");
         } else if (id == R.id.current_orders) {
+            //myfrag = new ItemFragment();
             getSupportActionBar().setTitle("Current Orders");
         } else if (id == R.id.order_history) {
-            myfrag = new orderHistoryFragment();
+            myfrag = new OrderHistoryragment();
             getSupportActionBar().setTitle("Order History");
         } else if (id == R.id.sign_out) {
             Intent intent = getIntent();
@@ -125,8 +134,11 @@ public class Home extends AppCompatActivity
         }
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, myfrag).commit();
+        if(fragmentManager == null){
+            return false;
+        }
 
+        fragmentManager.beginTransaction().replace(R.id.container, myfrag).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
