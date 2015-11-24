@@ -29,9 +29,9 @@ public class HistoryAdapter extends ArrayAdapter<OrderHistory> {
         public  ViewHolder(View view) {
             //super(view);
             mView = view;
-            order_detailV = (TextView) view.findViewById(R.id.order_details);
-            meal_priceV = (TextView) view.findViewById(R.id.meal_price);
-            timestampV = (TextView) view.findViewById(R.id.mytimestamp);
+            order_detailV = (TextView) view.findViewById(R.id.hist_order_details);
+            meal_priceV = (TextView) view.findViewById(R.id.hist_meal_price);
+            timestampV = (TextView) view.findViewById(R.id.hist_timestamp);
         }
     }
 
@@ -53,9 +53,9 @@ public class HistoryAdapter extends ArrayAdapter<OrderHistory> {
             //rowView = inflater.inflate(R.layout.single_meal, parent, false);
             // configure view holder
             ViewHolder viewHolder = new ViewHolder(rowView);
-            viewHolder.order_detailV = (TextView) rowView.findViewById(R.id.order_details);
-            viewHolder.meal_priceV = (TextView) rowView.findViewById(R.id.meal_price);
-            viewHolder.timestampV = (TextView) rowView.findViewById(R.id.mytimestamp);
+            viewHolder.order_detailV = (TextView) rowView.findViewById(R.id.hist_order_details);
+            viewHolder.meal_priceV = (TextView) rowView.findViewById(R.id.hist_meal_price);
+            viewHolder.timestampV = (TextView) rowView.findViewById(R.id.hist_timestamp);
             rowView.setTag(viewHolder);
         }
 
@@ -64,7 +64,7 @@ public class HistoryAdapter extends ArrayAdapter<OrderHistory> {
         OrderHistory hist = histories.get(position);
         holder.timestampV.setText(hist.timestamp);
         holder.order_detailV.setText(hist.order_details);
-        holder.timestampV.setText(hist.meal_price);
+        holder.timestampV.setText("Ghc "+hist.meal_price);
         return rowView;
     }
 }

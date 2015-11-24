@@ -67,7 +67,7 @@ public class MealsAdapter extends ArrayAdapter<Meal> {
         ViewHolder holder = (ViewHolder) rowView.getTag();
         Meal mymeal = meals.get(position);
         //holder.meal = s;
-        holder.meal_priceV.setText(mymeal.price);
+        holder.meal_priceV.setText("Ghc"+mymeal.price);
         holder.meal_nameV.setText(mymeal.mealName);
         holder.meal_idV.setText(mymeal.mealId);
         holder.cafeteria.setText(mymeal.cafeteria);

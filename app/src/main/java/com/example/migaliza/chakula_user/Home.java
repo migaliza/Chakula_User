@@ -119,7 +119,7 @@ public class Home extends AppCompatActivity
             myfrag = new MealsFragment();
             getSupportActionBar().setTitle("Menu");
         } else if (id == R.id.current_orders) {
-            //myfrag = new ItemFragment();
+            myfrag = new CurrentOrderFragment();
             getSupportActionBar().setTitle("Current Orders");
         } else if (id == R.id.order_history) {
             myfrag = new OrderHistoryragment();
