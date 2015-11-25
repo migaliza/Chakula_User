@@ -42,8 +42,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/current_status"
-                android:background="#c71616" />
+                android:id="@+id/current_status" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

@@ -1,7 +1,6 @@
 package com.example.migaliza.chakula_user;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,15 +24,17 @@ public class MealsAdapter extends ArrayAdapter<Meal> {
         public TextView meal_nameV;
         public TextView meal_priceV;
         public TextView cafeteria;
+        public TextView availability;
         public Meal meal;
 
         public  ViewHolder(View view) {
             //super(view);
             mView = view;
-            meal_nameV = (TextView) view.findViewById(R.id.meal_name);
-            meal_priceV = (TextView) view.findViewById(R.id.meal_price);
-            meal_idV = (TextView) view.findViewById(R.id.meal_id);
-            cafeteria = (TextView) view.findViewById(R.id.cafeteria);
+            meal_nameV = (TextView) view.findViewById(R.id.meal_meal_name);
+            meal_priceV = (TextView) view.findViewById(R.id.meal_meal_price);
+            meal_idV = (TextView) view.findViewById(R.id.meal_meal_id);
+            cafeteria = (TextView) view.findViewById(R.id.meal_cafeteria);
+            availability = (TextView) view.findViewById(R.id.meal_availability);
         }
     }
 
@@ -55,10 +56,11 @@ public class MealsAdapter extends ArrayAdapter<Meal> {
             //rowView = inflater.inflate(R.layout.single_meal, parent, false);
             // configure view holder
             ViewHolder viewHolder = new ViewHolder(rowView);
-            viewHolder.cafeteria = (TextView) rowView.findViewById(R.id.cafeteria);
-            viewHolder.meal_nameV = (TextView) rowView.findViewById(R.id.meal_name);
-            viewHolder.meal_idV = (TextView) rowView.findViewById(R.id.meal_id);
-            viewHolder.meal_priceV = (TextView) rowView.findViewById(R.id.meal_price);
+            viewHolder.cafeteria = (TextView) rowView.findViewById(R.id.meal_cafeteria);
+            viewHolder.meal_nameV = (TextView) rowView.findViewById(R.id.meal_meal_name);
+            viewHolder.meal_idV = (TextView) rowView.findViewById(R.id.meal_meal_id);
+            viewHolder.meal_priceV = (TextView) rowView.findViewById(R.id.meal_meal_price);
+            viewHolder.availability = (TextView)rowView.findViewById(R.id.meal_availability);
             //viewHolder.image = (ImageView) rowView.findViewById(R.id.ImageView01);
             rowView.setTag(viewHolder);
         }
@@ -71,6 +73,11 @@ public class MealsAdapter extends ArrayAdapter<Meal> {
         holder.meal_nameV.setText(mymeal.mealName);
         holder.meal_idV.setText(mymeal.mealId);
         holder.cafeteria.setText(mymeal.cafeteria);
+        String avai = "Not available";
+        if(mymeal.availability.equals("1")) {
+            avai = "Available";
+        }
+        holder.availability.setText(avai);
 
         return rowView;
     }

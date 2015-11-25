@@ -65,7 +65,7 @@ public class CurrentOrderAdapter extends ArrayAdapter<CurrentOrder> {
         ViewHolder holder = (ViewHolder) rowView.getTag();
         CurrentOrder myorder = currentOrders.get(position);
         //holder.meal = s;
-        holder.meal_priceV.setText(myorder.meal_price);
+        holder.meal_priceV.setText("Ghc "+myorder.meal_price);
         holder.statusV.setText(myorder.status);
         holder.order_detailsV.setText(myorder.order_details);
         holder.timestampV.setText(myorder.timestamp);

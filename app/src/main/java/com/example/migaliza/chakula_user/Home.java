@@ -12,14 +12,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     public static String username;
-    public static String passord;
-    public int user_id;
+    public static String password;
+    public static String user_id;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +40,19 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //View myheader = findViewById(R.id.myheader);
+        //TextView username_area = (TextView) myheader.findViewById(R.id.username_area);
 
-        TextView username_area = (TextView)findViewById(R.id.username_area);
-
-        Intent intent = getIntent();
-        if(intent.hasExtra("username") && intent.hasExtra("password") && intent.hasExtra("user_id")){
+        Intent intent = this.getIntent();
+        if(intent.hasExtra("username")){
             this.username = intent.getExtras().getString("username");
-            this.passord = intent.getExtras().getString("password");
-            this.user_id = Integer.parseInt(intent.getExtras().getString("user_id"));
-            username_area.setText(this.username);
+            this.password = intent.getExtras().getString("password");
+            this.user_id = intent.getExtras().getString("user_id");
+            //System.out.println("Testing username"+this.username);
+            //username_area.setText(this.username);
         }
+        //username_area.setText("Salifu");
         getSupportActionBar().setTitle("Menu");
-
-        //super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_home);
-        //RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-        /*.setHasFixedSize(true);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);*/
     }
 
     /**
@@ -123,6 +120,7 @@ public class Home extends AppCompatActivity
             getSupportActionBar().setTitle("Current Orders");
         } else if (id == R.id.order_history) {
             myfrag = new OrderHistoryragment();
+
             getSupportActionBar().setTitle("Order History");
         } else if (id == R.id.sign_out) {
             Intent intent = getIntent();

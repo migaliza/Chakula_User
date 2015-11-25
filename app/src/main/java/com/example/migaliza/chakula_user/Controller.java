@@ -126,7 +126,7 @@ public class Controller extends AsyncTask<String, Void, String> {
             /************ Show Output on screen/activity **********/
 
             //output.setText(OutputData);
-            System.out.println(OutputData);
+            //System.out.println(OutputData);
 
         } catch (JSONException e) {
 
@@ -167,10 +167,9 @@ public class Controller extends AsyncTask<String, Void, String> {
                 String meal_name = jsonChildNode.optString("meal_name");
                 String meal_price   = jsonChildNode.optString("meal_price");
                 String timestamp = jsonChildNode.optString("timestamp");
-                String cafeteria = jsonChildNode.optString("cafeteria");
-                String order_detail = meal_name+"   "+cafeteria;
 
-                OrderHistory myorde = new OrderHistory(order_detail, meal_price, timestamp);
+
+                OrderHistory myorde = new OrderHistory(meal_name, meal_price, timestamp);
                 historylist.add(myorde);
 
             }
@@ -178,7 +177,7 @@ public class Controller extends AsyncTask<String, Void, String> {
             /************ Show Output on screen/activity **********/
 
         //output.setText(OutputData);
-           System.out.println(historylist.get(0).order_details);
+           //System.out.println(historylist.get(0).order_details);
 
         } catch (JSONException e) {
 
@@ -218,8 +217,8 @@ public class Controller extends AsyncTask<String, Void, String> {
                 String meal_name = jsonChildNode.optString("meal_name");
                 String meal_price   = jsonChildNode.optString("meal_price");
                 String meal_id = jsonChildNode.optString("meal_id");
-                String cafeteria = jsonChildNode.optString("cafeteria");
-                String availability = jsonChildNode.optString("availability");
+                String cafeteria = jsonChildNode.optString("cafeteria_name");
+                String availability = jsonChildNode.optString("meal_availability");
 
                 meals.add(new Meal(meal_id, meal_name, meal_price, cafeteria, availability));
             }

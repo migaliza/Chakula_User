@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.migaliza.chakula_user.MealsFragment">
+    tools:context="com.example.migaliza.chakula_user.MealsFragment"
+    android:background="@drawable/cho">
 
     <!-- TODO: Update blank fragment layout -->
     <ListView

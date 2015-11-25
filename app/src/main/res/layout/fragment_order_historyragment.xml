@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.migaliza.chakula_user.OrderHistoryragment">
+    tools:context="com.example.migaliza.chakula_user.OrderHistoryragment"
+    android:background="@drawable/cho">
 
     <ListView
         android:id="@+id/history_list"
