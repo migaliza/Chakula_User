@@ -38,17 +38,23 @@ public class FullscreenActivity extends AppCompatActivity {
 
             Controller mycontrol = new Controller();
             String cmd = "login";
-            String url = "http://10.10.43.174/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
+            String url = "http://10.10.56.70/chakula/controller/ajax-action.php?cmd=21&username="+username+"&password="+password;
             mycontrol.execute(cmd, url);
+            try {
+                Thread.sleep(500);                 //1000 milliseconds is one second.
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
             String server_username = mycontrol.username;
             String server_password = mycontrol.password;
             int server_user_id = mycontrol.user_id;
 
             if (username.equals(server_username) && password.equals(server_password)) {
                 Intent intent = new Intent(this, Home.class);
-                intent.putExtra("name", username);
+                intent.putExtra("username", username);
                 intent.putExtra("password", password);
-                intent.putExtra("user_id", server_user_id);
+                intent.putExtra("user_id", ""+server_user_id);
+                System.out.println("Sending "+username+password+server_user_id);
                 startActivity(intent);
             }else{
                 Toast.makeText(this, "wrong login details", Toast.LENGTH_LONG).show();

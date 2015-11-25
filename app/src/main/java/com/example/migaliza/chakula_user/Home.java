@@ -14,14 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
-    public String username;
-    public String passord;
-    public int user_id;
-    //private RecyclerView mRecyclerView;
-    //private RecyclerView.Adapter mAdapter;
-    //private RecyclerView.LayoutManager mLayoutManager;
+    public static String username;
+    public static String password;
+    public static String user_id;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +40,19 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //View myheader = findViewById(R.id.myheader);
+        //TextView username_area = (TextView) myheader.findViewById(R.id.username_area);
 
-        Intent intent = getIntent();
-        if(intent.hasExtra("username") && intent.hasExtra("passwird") && intent.hasExtra("user_id")){
+        Intent intent = this.getIntent();
+        if(intent.hasExtra("username")){
             this.username = intent.getExtras().getString("username");
-            this.passord = intent.getExtras().getString("password");
-            this.user_id = Integer.parseInt(intent.getExtras().getString("user_id"));
+            this.password = intent.getExtras().getString("password");
+            this.user_id = intent.getExtras().getString("user_id");
+            //System.out.println("Testing username"+this.username);
+            //username_area.setText(this.username);
         }
+        //username_area.setText("Salifu");
+        getSupportActionBar().setTitle("Menu");
     }
 
     /**
@@ -106,13 +113,14 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.view_menu) {
-            // Handle the camera action
-            myfrag = new MenuFragment();
+            myfrag = new MealsFragment();
             getSupportActionBar().setTitle("Menu");
         } else if (id == R.id.current_orders) {
+            myfrag = new CurrentOrderFragment();
             getSupportActionBar().setTitle("Current Orders");
         } else if (id == R.id.order_history) {
-            myfrag = new orderHistoryFragment();
+            myfrag = new OrderHistoryragment();
+
             getSupportActionBar().setTitle("Order History");
         } else if (id == R.id.sign_out) {
             Intent intent = getIntent();
@@ -124,8 +132,11 @@ public class Home extends AppCompatActivity
         }
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, myfrag).commit();
+        if(fragmentManager == null){
+            return false;
+        }
 
+        fragmentManager.beginTransaction().replace(R.id.container, myfrag).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

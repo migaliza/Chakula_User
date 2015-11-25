@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.migaliza.chakula_user.CurrentOrderFragment"
+    android:background="@drawable/cho">
+
+    <ListView
+        android:id="@+id/current_orders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/current_order_row">
+    </ListView>
+
+</FrameLayout>
